@@ -185,7 +185,8 @@ module Khipu
     def build_request_url(path)
       # Add leading and trailing slashes to path
       path = "/#{path}".gsub(/\/+/, '/')
-      URI.encode(host + path)
+      #URI.encode(host + path)
+      Addressable::URI.escape(host+path)
     end
 
     def build_request_body(header_params, form_params, body)
@@ -205,7 +206,8 @@ module Khipu
     end
 
     def percent_encode(v)
-      return URI::escape(v.to_s.to_str, /[^a-zA-Z0-9\-\.\_\~]/)
+      #return URI::escape(v.to_s.to_str, /[^a-zA-Z0-9\-\.\_\~]/)
+      return  Addressable::URI.escape(v)
     end
 
     # Update hearder and query params based on authentication settings.
